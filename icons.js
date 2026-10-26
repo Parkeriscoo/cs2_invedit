@@ -13,7 +13,7 @@ export class Icons {
       if (!data[table] || typeof data[table] !== 'object' || Array.isArray(data[table])) throw new Error(`Invalid icon table: ${table}.`);
     }
     for (const url of Object.values(data.images)) {
-      if (typeof url !== 'string' || !url.startsWith('https://cdn.steamstatic.com/apps/730/icons/')) throw new Error('Invalid icon URL.');
+      if (typeof url !== 'string' || !(url.startsWith('https://cdn.steamstatic.com/apps/730/icons/') || url.startsWith('https://community.akamai.steamstatic.com/economy/image/'))) throw new Error('Invalid icon URL.');
     }
     const check = id => { if (id !== null && !Object.hasOwn(data.images, id)) throw new Error('Unknown icon image reference.'); };
     for (const definition of Object.values(data.definitions)) {
