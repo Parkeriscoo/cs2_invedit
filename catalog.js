@@ -27,11 +27,10 @@ export class Catalog {
     for (const record of data.attributes) this.attributes.set(record.id, record);
   }
 
-  search({ view = 'all', category = '', query = '', allDefinitions = false } = {}) {
+  search({ view = 'definitions', category = '', query = '', allDefinitions = false } = {}) {
     const tokens = normalizeSearch(query).split(' ').filter(Boolean);
-    const source = view === 'all' ? [...this.data.definitions, ...this.data.variants] : this.data[view];
-    return source.filter(record =>
-      (view === 'variants' || allDefinitions || !record.advancedOnly) &&
+    return this.data[view].filter(record =>
+      (view !== 'definitions' || allDefinitions || !record.advancedOnly) &&
       (!category || record.category === category) &&
       tokens.every(token => this.searchTexts.get(record.key).includes(token)));
   }

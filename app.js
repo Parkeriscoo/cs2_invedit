@@ -168,8 +168,8 @@ function renderSelection() {
 function renderCatalog(reset = false) {
   if (!catalog) return;
   const view = $('catalog-view').value;
-  $('catalog-all').disabled = view === 'variants';
-  $('advanced-label').hidden = view === 'variants';
+  $('catalog-all').disabled = view !== 'definitions';
+  $('advanced-label').hidden = view !== 'definitions';
   catalogueMatches = catalog.search({ view, category: $('catalog-category').value, query: $('catalog-search').value, allDefinitions: $('catalog-all').checked });
   $('catalog-count').textContent = `${catalogueMatches.length.toLocaleString()} items`;
   catalogueGrid.setRecords(catalogueMatches, reset);
